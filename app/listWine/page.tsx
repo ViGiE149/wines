@@ -103,12 +103,23 @@ const WineList = () => {
         </tbody>
       </table>
       
-      <div>
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-        <span>Page {currentPage}</span>
-        <button onClick={handleNextPage}>Next</button>
-      </div>
-    </div>
+      <div className="flex justify-center items-center mt-4">
+  <button
+    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+    onClick={handlePrevPage}
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+  <span className="mx-4 font-bold">Page {currentPage}</span>
+  <button
+    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    onClick={handleNextPage}
+  >
+    Next
+  </button>
+</div>
+</div>
   );
 };
 
