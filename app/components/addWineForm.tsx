@@ -8,7 +8,7 @@ export default function AddWineServer() {
     name: '',
     year: '',
     type: '',
-    varietal: 'Red',
+    varietal: '',
     rating: '',
     consumed: '',
   });
@@ -75,18 +75,21 @@ export default function AddWineServer() {
         className='input input-bordered w-full max-w-xs shadow-2xl m-1'
       />
 
-      <select
-        onChange={handleChange}
-        value={formData.varietal}
-        name='varietal'
-        className='select select-bordered w-full max-w-xs shadow-2xl m-1'
-      >
-        <option value='Red'>Red</option>
-        <option value='Red Blend'>Red Blend</option>
-        <option value='White Blend'>White Blend</option>
-        <option value='bland'>bland</option>
-        {/* Add more options as needed */}
-      </select>
+<select
+  defaultValue={'DEFAULT'} 
+  onChange={handleChange}
+  name='varietal'
+  className='select select-bordered w-full max-w-xs shadow-2xl m-1'
+>
+  <option value="DEFAULT" disabled>select? varietal</option> {/* Remove selected attribute */}
+  <option value='Red'>Red</option>
+  <option value='Red Blend'>Red Blend</option>
+  <option value='White Blend'>White Blend</option>
+  <option value='bland'>bland</option>
+  {/* Add more options as needed */}
+</select>
+
+
 
       <input
         onChange={handleChange}
@@ -100,12 +103,13 @@ export default function AddWineServer() {
    
 
 <select
+ defaultValue={'DEFAULT'}
   onChange={handleChange}
-  value={formData.consumed}
+ 
   name='consumed'
   className='select select-bordered w-full max-w-xs shadow-2xl m-1'
 >
-  <option value='' disabled selected>Consumed? Select Yes or No</option>
+  <option value="DEFAULT" key='' disabled selected>Consumed? Select Yes or No</option>
   <option value='yes'>Yes</option>
   <option value='no'>No</option>
 </select>

@@ -17,7 +17,7 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <div className="max-w-md w-full p-6  rounded-md shadow-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
+        <h2 className="text-2xl font-serif font-semibold text-center mb-6">MY WiNe</h2>
         <form onSubmit={handleRegister}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-600 text-sm font-medium mb-2">

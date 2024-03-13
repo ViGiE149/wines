@@ -13,7 +13,7 @@ const WineList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/getWineList?page=${currentPage}&limit=${itemsPerPage}`);
+        const response = await fetch(`/api/getWineList?page=${currentPage}&limit=${itemsPerPage}`);
 
         if (!response.ok) {
           console.error('Failed to fetch wine data');
@@ -55,19 +55,26 @@ const WineList = () => {
 
   const handleDelete = async (id:any) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/deleteWine/${id}`, {
+      const response = await fetch('/api/deleteWine', {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(id),
       });
 
-      if (!response.ok) {
-        console.error('Failed to delete wine');
-        return;
-      }
+      const data = await response.json();
+      console.log('Fetch Response:', data);
 
-      // Remove the deleted wine from the wineData state
-      setWineData(wineData.filter((wine:any) => wine.id !== id));
+      if (response.ok) {
+        console.log('Inserted wine:', data.result);
+        // Redirect or perform any other action after successful insertion
+        // router.push('/login'); // Replace '/login' with your desired route
+      } else {
+        console.error('Error inserting wine:', response.statusText);
+      }
     } catch (error) {
-      console.error('Error deleting wine:', error);
+      console.error('Error inserting wine:', error);
     }
   };
 
