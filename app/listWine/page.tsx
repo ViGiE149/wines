@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link'
+
+import Link from 'next/link';
 
 const WineList = () => {
   const [allWineData, setAllWineData] = useState([]);
@@ -22,7 +23,6 @@ const WineList = () => {
         const data = await response.json();
         setAllWineData(data.result.rows);
         setWineData(data.result.rows);
-        console.log(data);
       } catch (error) {
         console.error('Error fetching wine data:', error);
       }
@@ -53,6 +53,24 @@ const WineList = () => {
     }
   };
 
+  const handleDelete = async (id:any) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/deleteWine/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        console.error('Failed to delete wine');
+        return;
+      }
+
+      // Remove the deleted wine from the wineData state
+      setWineData(wineData.filter((wine:any) => wine.id !== id));
+    } catch (error) {
+      console.error('Error deleting wine:', error);
+    }
+  };
+
   return (
     <div className="overflow-x-auto">
       <div className="mb-4">
@@ -80,6 +98,7 @@ const WineList = () => {
             <th className="py-2">Rating</th>
             <th className="py-2">Consumed</th>
             <th className="py-2">Date Consumed</th>
+            <th className="py-2">Actions</th> {/* New column for delete button */}
           </tr>
         </thead>
         <tbody>
@@ -94,42 +113,48 @@ const WineList = () => {
                 <td className="py-2 px-3">{wine.rating}</td>
                 <td className="py-2 px-3">{wine.consumed}</td>
                 <td className="py-2 px-3">{wine.date_consumed}</td>
+                <td className="py-2 px-3">
+                  <button
+                    onClick={() => handleDelete(wine.id)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td>No data available</td>
+              <td >No data available</td>
             </tr>
           )}
         </tbody>
       </table>
-      
-      <div className="flex justify-center items-center mt-4">
-  <button
-    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-    onClick={handlePrevPage}
-    disabled={currentPage === 1}
-  >
-    Previous
-  </button>
-  <span className="mx-4 font-bold">Page {currentPage}</span>
-  <button
-    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    onClick={handleNextPage}
-  >
-    Next
-  </button>
 
-  <Link
+      <div className="flex justify-center items-center mt-4">
+        <button
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="mx-4 font-bold">Page {currentPage}</span>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleNextPage}
+        >
+          Next
+        </button>
+
+        <Link
           href="/addWine"
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
         >
           Add Wine
-  </Link>
-
-
-</div>
-</div>
+        </Link>
+      </div>
+    </div>
   );
 };
 
