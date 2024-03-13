@@ -2,6 +2,7 @@
 
 "use client"
 import React, { useState } from 'react';
+import Link from 'next/link'
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -14,8 +15,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md">
+    <div className="min-h-screen flex items-center justify-center ">
+      <div className="max-w-md w-full p-6  rounded-md shadow-md">
         <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
         <form onSubmit={handleRegister}>
           <div className="mb-4">
@@ -60,6 +61,10 @@ const Register = () => {
           >
             Register
           </button>
+          <div className="text-center mt-4">
+            <span className="text-gray-600">Already have an account? </span>
+            <Link href="/login" className="text-blue-500 hover:underline">Login here</Link>
+          </div>
         </form>
       </div>
     </div>

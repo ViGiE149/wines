@@ -13,12 +13,12 @@ export default function AddWineServer() {
     consumed: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleAddWine = async (e) => {
+  const handleAddWine = async (e:any) => {
     e.preventDefault();
 
     try {

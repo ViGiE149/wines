@@ -1,19 +1,21 @@
 // pages/login.js
 "use client"
 import React, { useState } from 'react';
+import Link from 'next/link'
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = (e:any) => {
+    e.preventDefault();
     // Handle login logic here
     console.log('Login logic goes here');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md">
+    <div className= " min-h-screen flex items-center justify-center ">
+      <div className="max-w-md w-full p-6 bg-gray rounded-md shadow-md">
         <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
@@ -23,7 +25,7 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              className="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+              className="w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -35,7 +37,7 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              className="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+              className="w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -46,6 +48,12 @@ const Login = () => {
           >
             Login
           </button>
+          <div className="text-center">
+            <Link href="/register" className="text-blue-500 hover:underline">Register an Account</Link>
+          </div>
+          <div className="text-center">
+            <Link href="/reset-password" className="text-blue-500 hover:underline">Forgot Password?</Link>
+          </div>
         </form>
       </div>
     </div>

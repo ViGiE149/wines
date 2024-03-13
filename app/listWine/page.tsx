@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link'
 
 const WineList = () => {
   const [allWineData, setAllWineData] = useState([]);
@@ -118,6 +119,15 @@ const WineList = () => {
   >
     Next
   </button>
+
+  <Link
+          href="/addWine"
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Wine
+  </Link>
+
+
 </div>
 </div>
   );
